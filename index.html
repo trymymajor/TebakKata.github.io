@@ -222,6 +222,25 @@
       color: var(--color-text);
     }
 
+      .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+     }
+    }
+
     #play-again-btn {
       background-color: var(--color-key-correct);
       border: none;
@@ -268,6 +287,24 @@
         width: 100vw;
         padding: 0 0.5rem;
       }
+      .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
     }
   </style>
 </head>
@@ -470,7 +507,8 @@
         if (isCorrect) {
           isGameOver = true;
           victoryAudio.play(); // Play the audio
-          showMessage("Hari ini adalah hari di mana malaikat dalam hidupku dilahirkan. Tak terhitung berapa banyak air mata yang Ibu usap, berapa banyak tawa yang Ibu ciptakan, dan berapa banyak pelajaran hidup yang Ibu ajarkan. Setiap pelukan Ibu adalah rumah terbaik, dan setiap senyum Ibu adalah cahaya yang tak pernah padam. Terima kasih, Bu, sudah menjadi Ibu yang paling hebat di dunia ini. Semoga sisa umur Ibu dipenuhi dengan kebahagiaan, kedamaian, dan keberkahan. Doakan saya bisa selalu membanggakan Ibu.");
+          startConfetti();
+          showMessage("Untuk Ibu tercinta, selamat ulang tahun. Semoga kebahagiaan senantiasa menyertai langkah Ibu, dan setiap doamu menjadi nyata. Terima kasih sudah menjadi pelita dalam hidupku. Selamat menikmati hari istimewamu, Bu!");
         } else {
           currentRow++;
           currentGuess = '';
@@ -543,6 +581,18 @@
       createGrid();
 
     })();
+
+    function startConfetti() {
+      setInterval(() => {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+      }, 100);
+    }
   </script>
 </body>
 </html>
